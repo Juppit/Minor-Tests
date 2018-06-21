@@ -193,34 +193,36 @@ gcc1: $(TOOLCHAIN)
 #   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
 #   GCC_TAR_DIR = gcc-xtensa-master
 #   GCC_VERSION = xtensa
-	@echo
+	@echo .
 	@echo ================
 	@date
 	@make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
 	@date
-	@echo
+	@echo .
 	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/wget-xtensa-master.zip
 	@date
 	@echo
 	ls -l $(TAR_DIR)
-	@echo
+	@echo .
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
 	@date
-	-@unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 	@date
 	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
     else
 	@date
 	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
     endif
 	@date
-	@echo
+	@echo .
 	@echo ================
 	@date
-	@git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
+	#git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
 	@date
-	@echo
+	@echo .
 	@echo ================
 	ls -l $(SOURCE_DIR)
 	@bsdtar --version
