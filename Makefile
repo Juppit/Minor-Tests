@@ -189,10 +189,10 @@ gcc: $(TOOLCHAIN)
 	date
 
 gcc1: $(TOOLCHAIN)
-   GCC_URL = https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip
-   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
-   GCC_TAR_DIR = gcc-xtensa-master
-   GCC_VERSION = xtensa
+#   GCC_URL = https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip
+#   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
+#   GCC_TAR_DIR = gcc-xtensa-master
+#   GCC_VERSION = xtensa
 	@echo ================
 	@date
 	@make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
