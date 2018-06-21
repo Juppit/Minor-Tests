@@ -9,12 +9,12 @@ jobs:
           sources: 
             - ubuntu-toolchain-r-test
           packages: 
-            - unzip bsdtar gperf texinfo help2man gcc-multilib g++-multilib
+            - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
       script:
-        - "travis_wait 50 make build-3"
+        - "travis_wait 50 make"
     - os: osx
       script:
-        - "travis_wait 50 make build-3"
+        - "travis_wait 50 make"
 #    - os: osx
 #      script:
 #        - make build-2

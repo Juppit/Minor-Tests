@@ -1,59 +1,69 @@
 # Author: Peter Dobler (@Juppit)
 #
-# Last edit: 28.04.2018
+# Last edit: 21.06.2018
 
 BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
 
 PLATFORM := $(shell uname -s)
 ifneq (,$(findstring 64, $(shell uname -m)))
-    ARCH = 64
+    ARCH := 64
 else
-    ARCH = 32
+    ARCH := 32
 endif
 
-BUILD := $(PLATFORM)
+BUILD_OS :=
+CURSES_MINGW_BUILD :=
+
+BUILD_OS := $(PLATFORM)
 ifeq ($(OS),Windows_NT)
     ifneq (,$(findstring MINGW32,$(PLATFORM)))
-        BUILD := Mingw$(ARCH)
+        BUILD_OS := Mingw$(ARCH)
         BUILDPATH := /mingw$(ARCH)/bin:$(BUILDPATH)
+        # on Mingw only for CURSES necessary
+        BUILD_OS :=
+        CURSES_MINGW_BUILD := --build=x86_64-pc-mingw$(ARCH)
     endif
     ifneq (,$(findstring MINGW64,$(PLATFORM)))
-        BUILD := Mingw$(ARCH)
+        BUILD_OS := Mingw$(ARCH)
         BUILDPATH := /mingw$(ARCH)/bin:$(BUILDPATH)
+        # on Mingw only for CURSES necessary
+        BUILD_OS :=
+        CURSES_MINGW_BUILD := --build=x86_64-pc-mingw$(ARCH)
     endif
     ifneq (,$(findstring MSYS,$(PLATFORM)))
-        BUILD := MSYS$(ARCH)
+        BUILD_OS := MSYS$(ARCH)
         BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
-        BUILD := Cygwin$(ARCH)
+        BUILD_OS := Cygwin$(ARCH)
+        # on Cygwin necessary for GMP and GDB
+        BUILD_OS := --build=x86_64-unknown-cygwin
     endif
     ifneq (,$(findstring Cygwin,$(PLATFORM)))
-        BUILD := Cygwin$(ARCH)
+        BUILD_OS := Cygwin$(ARCH)
+        # on Cygwin necessary for GMP and GDB
+        BUILD_OS := --build=x86_64-unknown-cygwin
     endif
 else
     ifeq ($(PLATFORM),Darwin)
-        BUILD := MacOS$(ARCH)
+        BUILD_OS := MacOS$(ARCH)
     endif
     ifeq ($(PLATFORM),Linux)
+        BUILD_OS := Linux$(ARCH)
         ifneq (,$(findstring ARM,$(PLATFORM)))
-            BUILD := LinuxARM$(ARCH)
-        else
-            BUILD := Linux$(ARCH)
+            BUILD_OS := LinuxARM$(ARCH)
         endif
-        ifneq (,$(findstring ARCH64,$(PLATFORM)))
-            BUILD := LinuxARM$(ARCH)
+        ifneq (,$(findstring AARCH64,$(PLATFORM)))
+            BUILD_OS := LinuxARM$(ARCH)
         endif
     endif
 endif
 
-# various hosts are not supported like 'darwin'
-#HOST   = x86_64-apple-darwin14.0.0
 TARGET = xtensa-lx106-elf
 
 # create tar-file for distribution
 DISTRIB  = ""
-DISTRIB  = $(BUILD)-$(TARGET)
+DISTRIB  = $(BUILD_OS)-$(TARGET)
 USE_DISTRIB = y
 
 TOP = $(PWD)
@@ -67,20 +77,20 @@ COMP_LIB = $(TOP)/comp_libs
 SOURCE_DIR = $(TOP)/src
 TAR_DIR = $(TOP)/tarballs
 PATCHES_DIR = $(SOURCE_DIR)/patches
-BUILD_DIR = build-$(BUILD)
+BUILD_DIR = build-$(BUILD_OS)
 DIST_DIR = $(TOP)/distrib
 
 OUTPUT_DATE = date +"%Y-%m-%d %X" 
 
 # Log file
-BUILD_LOG = $(DIST_DIR)/$(BUILD)-build.log
-ERROR_LOG = $(DIST_DIR)/$(BUILD)-error.log
+BUILD_LOG = $(DIST_DIR)/$(BUILD_OS)-build.log
+ERROR_LOG = $(DIST_DIR)/$(BUILD_OS)-error.log
 
 GNU_URL = https://ftp.gnu.org/gnu
 
 GMP_VERSION = 6.1.2
-CURSES_VERSION  = 6.1
 GCC_VERSION  = 8.1.0
+GCC_VERSION  = xtensa
 
 GMP = gmp
 GMP_DIR = $(SOURCE_DIR)/$(GMP)-$(GMP_VERSION)
@@ -92,23 +102,6 @@ BUILD_GMP_DIR = $(GMP_DIR)/$(BUILD_DIR)
 GMP_URL = $(GNU_URL)/$(GMP)/$(GMP)-$(GMP_VERSION).tar.bz2
 GMP_TAR = $(TAR_DIR)/$(GMP)-$(GMP_VERSION).tar.bz2
 GMP_TAR_DIR = $(GMP)-$(GMP_VERSION)
-
-CURSES = ncurses
-CURSES_DIR = $(SOURCE_DIR)/$(CURSES)-$(CURSES_VERSION)
-BUILD_CURSES_DIR = $(CURSES_DIR)/$(BUILD_DIR)
-CURSES_URL = $(GNU_URL)/$(CURSES)/$(CURSES)-$(CURSES_VERSION).tar.gz
-CURSES_TAR = $(TAR_DIR)/$(CURSES)-$(CURSES_VERSION).tar.bz2
-CURSES_TAR_DIR = $(CURSES)-$(CURSES_VERSION)
-
-EXPAT = expat
-EXPAT_DIR = $(SOURCE_DIR)/$(EXPAT)-$(EXPAT_VERSION)
-BUILD_EXPAT_DIR = $(EXPAT_DIR)/$(BUILD_DIR)
-EXPAT_URL = https://github.com/libexpat/libexpat/releases/download/R_2_1_0/expat-2.1.0.tar.gz
-ifneq (,$(findstring 2.1.0,$(EXPAT_VERSION)))
-    EXPAT_URL = https://github.com/libexpat/libexpat/releases/download/R_2_1_0/expat-2.1.0.tar.gz
-endif
-EXPAT_TAR = $(TAR_DIR)/$(EXPAT)-$(EXPAT_VERSION).tar.gz
-EXPAT_TAR_DIR = $(EXPAT)-$(EXPAT_VERSION)
 
 GCC = gcc
 GCC_DIR = $(SOURCE_DIR)/$(GCC)-$(GCC_VERSION)
@@ -128,22 +121,15 @@ endif
 GMP_OPT   = --disable-shared --enable-static
 # cygwin
 GMP_CONF  =
-ifneq (,$(findstring Cygwin,$(BUILD)))
+ifneq (,$(findstring Cygwin,$(BUILD_OS)))
     GMP_CONF = --build=x86_64-unknown-cygwin
 endif
 
-CURSES_OPT = --enable-symlinks --without-manpages --without-tests \
-              --without-cxx --without-cxx-binding --without-ada
 CURSES_CONF  =
 # Mingw
-ifneq (,$(findstring Mingw,$(BUILD)))
-    CURSES_OPT = --enable-symlinks --without-manpages --without-tests \
-                 --without-cxx --without-cxx-binding --without-ada \
-                 --enable-term-driver --enable-sp-funcs
+ifneq (,$(findstring Mingw,$(BUILD_OS)))
     CURSES_CONF = --build=x86_64-pc-mingw$(ARCH)
 endif
-
-EXPAT_OPT =
 
 WGET     := wget -cq
 PATCH    := patch -s -b -N 
@@ -158,30 +144,26 @@ MAKE_OPT := V=1 -s
 CONF_OPT := configure -q
 INST_OPT := install -s
 
-.PHONY: build-1 build-2 build-3
+.PHONY: build-1
 
 all:
-	$(info Detected: $(BUILD) on $(OS))
+	$(info Detected: $(BUILD_OS) on $(OS))
 	$(info Processors: $(NUMBER_OF_PROCESSORS))
-	@echo "Build:     $(BUILD)"
+	@echo "Build:     $(BUILD_OS)"
 	@echo "BuildPath: $(BUILDPATH)"
 	@echo "Platform:  $(PLATFORM)"
 	@mkdir -p $(DIST_DIR)
 	@date > $(BUILD_LOG)
 	@date > $(ERROR_LOG)
-    ifneq (,$(findstring CYGWIN,$(BUILD)))
-		@echo BUILD ist: $(BUILD)
+    ifneq (,$(findstring CYGWIN,$(BUILD_OS)))
+		@echo BUILD_OS ist: $(BUILD_OS)
     endif
-    ifneq (,$(findstring Cygwin,$(BUILD)))
-		@echo Build ist: $(BUILD)
+    ifneq (,$(findstring Cygwin,$(BUILD_OS)))
+		@echo Build ist: $(BUILD_OS)
     endif
-	$(MAKE) build-3
-###	$(MAKE) build-2
+	$(MAKE) build-1
 
-#build-1: $(TOOLCHAIN) gmp if_expat
-build-1: $(TOOLCHAIN) guess
-build-2: $(TOOLCHAIN) if_curses
-build-3: $(TOOLCHAIN) gcc
+build-1: $(TOOLCHAIN) gcc1
 
 $(SOURCE_DIR):
 	@mkdir -p $(SOURCE_DIR)
@@ -194,36 +176,10 @@ $(COMP_LIB):
 $(TOOLCHAIN): $(SOURCE_DIR) $(DIST_DIR) $(TAR_DIR) $(COMP_LIB)
 
 $(GMP)_patch:
-$(CURSES)_patch:
-
-guess: $(TOOLCHAIN)
-	echo "Parameter BUILD_TRIPPEL: $(BUILD_TRIPPEL)"
-	@echo "**** new config.guess"
-	-./config.guess
-	@echo "**** uname -a:"
-	@uname -a
-	@echo "**** start configure gmp"
-	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
-	@echo "**** start config.guess"
-	-cd $(GMP_DIR) && ./config.guess
-	@echo "**** end gmp"
 
 gmp: $(TOOLCHAIN)
 	echo "Parameter BUILD_TRIPPEL: $(BUILD_TRIPPEL)"
-	@echo "**** new config.guess"
-	-./config.guess
-	@echo "**** uname -a:"
-	@uname -a
-	@echo "**** start configure gmp"
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
-	@echo "**** start config.guess"
-	-cd $(GMP_DIR) && ./config.guess
-	@echo "**** end gmp"
-
-if_expat: $(TOOLCHAIN)
-#	@PATH="$(SAFEPATH)" $(MAKE) $(SOURCE_DIR)/.$(EXPAT).extracted
-if_curses: $(TOOLCHAIN)
-	@PATH="$(SAFEPATH)" $(MAKE) $(SOURCE_DIR)/.$(CURSES).installed
 
 gcc: $(TOOLCHAIN)
 	echo $(GCC)-$(GCC_VERSION)
@@ -231,31 +187,38 @@ gcc: $(TOOLCHAIN)
 	date
 	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).extracted
 	date
-#   GCC_URL = https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip
-#   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
-#   GCC_TAR_DIR = gcc-xtensa-master
-#   GCC_VERSION = xtensa
-	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/call0-4.9.2.zip --output-document $(TAR_DIR)/gcc-xtensa-call0-4.9.2.zip
-	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/xtensa-ctng-esp-5.2.0.zip --output-document $(TAR_DIR)/gcc-xtensa-xtensa-ctng-esp-5.2.0.zip
-	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/xtensa-ctng-7.2.0.zip --output-document $(TAR_DIR)/gcc-xtensa-xtensa-ctng-7.2.0.zip
-	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/gcc-xtensa-master.zip
-	date
+
+gcc1: $(TOOLCHAIN)
+   GCC_URL = https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip
+   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
+   GCC_TAR_DIR = gcc-xtensa-master
+   GCC_VERSION = xtensa
+	@echo ================
+	@date
+	@make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+	@date
+	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/wget-xtensa-master.zip
+	@date
 	ls -l $(TAR_DIR)
-	echo ================
-    ifneq (,$(findstring Linux,$(BUILD)))
-	-unzip -q $(TAR_DIR)/gcc-xtensa-call0-4.9.2.zip -d $(SOURCE_DIR)
-	-unzip -q $(TAR_DIR)/gcc-xtensa-xtensa-ctng-esp-5.2.0.zip -d $(SOURCE_DIR)
-	-unzip -q $(TAR_DIR)/gcc-xtensa-xtensa-ctng-7.2.0.zip -d $(SOURCE_DIR)
-	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
-	-$(UNTAR) $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+	@echo ================
+    ifneq (,$(findstring Linux,$(BUILD_OS)))
+	@date
+	-@unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	@date
+	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
     else
-	-$(UNTAR) $(TAR_DIR)/gcc-xtensa-call0-4.9.2.zip -C $(SOURCE_DIR)
-	-$(UNTAR) $(TAR_DIR)/gcc-xtensa-xtensa-ctng-esp-5.2.0.zip -C $(SOURCE_DIR)
-	-$(UNTAR) $(TAR_DIR)/gcc-xtensa-xtensa-ctng-7.2.0.zip -C $(SOURCE_DIR)
-	-$(UNTAR) $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+	@date
+	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
     endif
-	date
+	@date
+	@echo ================
+	@date
+	#@git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
+	@date
+	@echo ================
 	ls -l $(SOURCE_DIR)
+	@bsdtar --version
+
 
 #*******************************************
 #************ submodul section *************
@@ -325,30 +288,6 @@ $(SOURCE_DIR)/.$(GMP).builded: $(SOURCE_DIR)/.$(GMP).configured
 	$(call Build_Modul,$(GMP),$(BUILD_GMP_DIR))
 $(SOURCE_DIR)/.$(GMP).installed: $(SOURCE_DIR)/.$(GMP).builded
 	$(call Install_Modul,$(GMP),$(BUILD_GMP_DIR),$(INST_OPT))
-
-#************** EXPAT
-$(SOURCE_DIR)/.$(EXPAT).loaded:
-	$(call Load_Modul,$(EXPAT),$(EXPAT_URL),$(EXPAT_TAR))
-$(SOURCE_DIR)/.$(EXPAT).extracted: $(SOURCE_DIR)/.$(EXPAT).loaded
-	$(call Extract_Modul,$(EXPAT),$(EXPAT_VERSION),$(EXPAT_DIR),$(EXPAT_TAR),$(EXPAT_TAR_DIR))
-$(SOURCE_DIR)/.$(EXPAT).configured: $(SOURCE_DIR)/.$(EXPAT).extracted
-	$(call Config_Modul,$(EXPAT),$(BUILD_EXPAT_DIR),--prefix=$(COMP_LIB)/$(EXPAT)-$(EXPAT_VERSION),$(EXPAT_OPT))
-$(SOURCE_DIR)/.$(EXPAT).builded: $(SOURCE_DIR)/.$(EXPAT).configured
-	$(call Build_Modul,$(EXPAT),$(BUILD_EXPAT_DIR))
-$(SOURCE_DIR)/.$(EXPAT).installed: $(SOURCE_DIR)/.$(EXPAT).builded
-	$(call Install_Modul,$(EXPAT),$(BUILD_EXPAT_DIR),$(INST_OPT))
-
-#************** CURSES
-$(SOURCE_DIR)/.$(CURSES).loaded:
-	$(call Load_Modul,$(CURSES),$(CURSES_URL),$(CURSES_TAR))
-$(SOURCE_DIR)/.$(CURSES).extracted: $(SOURCE_DIR)/.$(CURSES).loaded
-	$(call Extract_Modul,$(CURSES),$(CURSES_VERSION),$(CURSES_DIR),$(CURSES_TAR),$(CURSES_TAR_DIR))
-$(SOURCE_DIR)/.$(CURSES).configured: $(SOURCE_DIR)/.$(CURSES).extracted
-	$(call Config_Modul,$(CURSES),$(BUILD_CURSES_DIR),$(CURSES_CONF) --prefix=$(COMP_LIB)/$(CURSES)-$(CURSES_VERSION),$(CURSES_OPT))
-$(SOURCE_DIR)/.$(CURSES).builded: $(SOURCE_DIR)/.$(CURSES).configured
-	$(call Build_Modul,$(CURSES),$(BUILD_CURSES_DIR))
-$(SOURCE_DIR)/.$(CURSES).installed: $(SOURCE_DIR)/.$(CURSES).builded
-	$(call Install_Modul,$(CURSES),$(BUILD_CURSES_DIR),$(INST_OPT))
 
 #************** GCC (The GNU C preprocessor)
 $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded:
