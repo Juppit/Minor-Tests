@@ -213,7 +213,7 @@ gcc1: $(TOOLCHAIN)
 	@date
 	@echo ================
 	@date
-	#@git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
+	@git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
 	@date
 	@echo ================
 	ls -l $(SOURCE_DIR)
