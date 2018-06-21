@@ -1,0 +1,45 @@
+image: Visual Studio 2017
+
+environment:
+  matrix:
+  - MSYSTEM: Cygwin64
+    PATH: C:\msys64\usr\bin
+    BUILD: Cygwin64
+  - MSYSTEM: MINGW64
+    PATH: C:\msys64\usr\bin
+    Build: MinGW64
+#run bash without changing current directory
+  CHERE_INVOKING: 1
+
+build_script:
+  - if not exist *.tar.gz ( bash --login -c "ls")
+  - bash --login -c "echo **** PATH:  $PATH"
+  - bash --login -c "echo **** BUILD: $BUILD"
+  - bash --login -c "make"
+  - bash --login -c "ls -l distrib/$BUILD*"
+
+test:
+  off
+
+on_success:
+  - bash --login -c "tail -n20 distrib/$BUILD*.log"
+
+on_failure:
+  - bash --login -c "tail -n20 distrib/$BUILD*.log"
+
+artifacts:
+  - path: 'distrib/%BUILD%*.log'
+    name: logs
+    type: zip
+
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: D3FG8oKD3fIPj7SZhdAdsyDiZFIT0BRy64eudCwYYNX6jBPltdfjtZBGnzDWixB0
+  artifact: logs
+
+notifications:
+  - provider: Email
+    on_build_success: false
+    on_build_failure: false
+    on_build_status_changed: false

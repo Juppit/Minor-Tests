@@ -1,0 +1,13 @@
+#check-travis
+.travis*
+!.travis.yml
+*.txt
+*.sh
+src/*
+comp_libs
+tarballs
+distrib
+appveyor*
+!appveyor.yml
+
+

@@ -1,0 +1,46 @@
+sudo: false
+language: c
+jobs:
+  include:
+    - os: linux
+      dist: trusty
+      addons: 
+        apt:
+          sources: 
+            - ubuntu-toolchain-r-test
+          packages: 
+            - unzip bsdtar gperf texinfo help2man gcc-multilib g++-multilib
+      script:
+        - "travis_wait 50 make build-3"
+    - os: osx
+      script:
+        - "travis_wait 50 make build-3"
+#    - os: osx
+#      script:
+#        - make build-2
+before_script:
+  - cd $TRAVIS_BUILD_DIR
+  - mkdir -p distrib
+after_script:
+  - ls -la . distrib
+on_failure:
+  - tail -20 distrib/*error.log
+before_install:
+  - test -n $CC  && unset CC
+  - test -n $CXX && unset CXX
+deploy: 
+  api_key: $CheckCIDeploy
+  file: distrib/*
+  file_glob: true
+  overwrite: true
+  provider: releases
+  skip_cleanup: true
+  true: 
+    branches: 
+      only: 
+        - master
+        - "/v\\d+\\.\\d+[a-z]/"
+    repo: Juppit/check-travis
+    tags: true
+notifications:
+  email: false
