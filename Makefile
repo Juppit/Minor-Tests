@@ -207,10 +207,10 @@ gcc1: $(TOOLCHAIN)
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
 	@date
-	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
 	@date
-	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
     else
 	@date
 	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
