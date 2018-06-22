@@ -231,6 +231,11 @@ gcc1: $(TOOLCHAIN)
 #*******************************************
 #************ submodul section *************
 #*******************************************
+%.extracted: %.zip
+	unzip -q $<
+%.extracted: %.tar.gz
+	$(UNTAR) $<
+
 
 define Load_Modul
 	@$(MKDIR) $(TAR_DIR)
@@ -241,6 +246,19 @@ define Load_Modul
 endef
 
 define Extract_Modul
+    @if ! test -f $(SOURCE_DIR)/.$1-$2.extracted; then echo "$(STRIPLINE)"; fi
+    @if ! test -f $(SOURCE_DIR)/.$1-$2.extracted; then echo "$(STRIP) Extract $1..." | tee -a $(ERROR_LOG); fi
+    @#### Extract: if not exist $(SOURCE_DIR)/.$1.extracted then $(RMDIR) $3 && untar/unzip $4 and mv to $3
+    @#### on linux bsdtar dosn't work if zip archives are not set up properly
+    if (! test -f $(SOURCE_DIR)/.$1-$2.extracted) && (  test -f $(basename $4).zip) && (test -z $(findstring Linux,$(BUILD_OS))); \
+       then $(RMDIR) $3 && $(UNZIP) $4 -d $(SOURCE_DIR); fi
+    if (! test -f $(SOURCE_DIR)/.$1-$2.extracted) && ((! test -f $(basename $4).zip) || (test -n $(findstring Linux,$(BUILD_OS)))); \
+       then $(RMDIR) $3 && $(UNTAR) $4 -C $(SOURCE_DIR); fi
+    -@if (! test -f $(SOURCE_DIR)/.$1-$2.extracted) && (! test -f $3); then $(MOVE) $(SOURCE_DIR)/$5 $3; fi
+    @touch $(SOURCE_DIR)/.$1-$2.extracted
+endef
+
+define Untar_Modul
     @if ! test -f $(SOURCE_DIR)/.$1.extracted; then echo "$(STRIPLINE)"; fi
     @if ! test -f $(SOURCE_DIR)/.$1.extracted; then echo "$(STRIP) Extract $1..." | tee -a $(ERROR_LOG); fi
     @#### Extract: if not exist $(SOURCE_DIR)/.$1.extracted then $(RMDIR) $3 && untar $4 and mv to $3
