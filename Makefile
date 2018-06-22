@@ -163,7 +163,7 @@ all:
     endif
 	$(MAKE) build-1
 
-build-1: $(TOOLCHAIN) gcc1
+build-1: $(TOOLCHAIN) gcc
 
 $(SOURCE_DIR):
 	@mkdir -p $(SOURCE_DIR)
