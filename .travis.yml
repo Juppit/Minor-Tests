@@ -3,7 +3,8 @@ jobs:
   include:
     - os: windows
       script:
-        - ls
+        - ls /bin
+        - ls /usr/bin
         - echo $PATH
         - "travis_wait 50 make"
     - os: linux
