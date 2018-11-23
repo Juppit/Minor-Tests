@@ -12,8 +12,10 @@ jobs:
         - where cyg-get
         - ls C:/ProgramData/chocolatey/bin/cyg-get*
         - cyg-get.bat install make
+        - where make
         - ls
         - ls c:/tools/cygwin
+        - ls c:/tools/cygwin/bin
         - make --version
 #        - "travis_wait 50 make"
         - ls /bin
