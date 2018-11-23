@@ -11,7 +11,7 @@ jobs:
         - choco install cyg-get
         - where cyg-get
         - ls C:/ProgramData/chocolatey/bin/cyg-get*
-        - cyg-get.bat make
+        - cyg-get.bat install make
         - ls
         - ls c:/tools/cygwin
         - make --version
