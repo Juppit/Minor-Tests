@@ -7,14 +7,14 @@ jobs:
           packages: 
             - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
       script:
-        - wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg
+#        - wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg
+#        - chmod +x apt-cyg
+#        - ./apt-cyg install nano
         - ls
-        - chmod +x apt-cyg
-        - ./apt-cyg install nano
+        - "travis_wait 50 cmake"
         - ls /bin
         - ls /usr/bin
         - echo $PATH
-        - "travis_wait 50 make"
     - os: linux
       dist: trusty
       addons: 
