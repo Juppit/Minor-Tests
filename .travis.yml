@@ -7,6 +7,8 @@ jobs:
           packages: 
             - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
       script:
+        - wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg
+        - apt-cyg install nano
         - ls /bin
         - ls /usr/bin
         - echo $PATH
