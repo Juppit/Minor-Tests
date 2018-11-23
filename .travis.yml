@@ -11,11 +11,13 @@ jobs:
 #        - chmod +x apt-cyg
 #        - ./apt-cyg install nano
         - choco install cygwin
+        - ls c:/tools/cygwin
+        - ls c:\tools\cygwin
         - choco install cyg-get
         - chmod +x cyg-get
         - cyg-get make
         - ls
-        - "travis_wait 50 make"
+#        - "travis_wait 50 make"
         - ls /bin
         - ls /usr/bin
         - echo $PATH
