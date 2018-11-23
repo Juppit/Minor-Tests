@@ -12,9 +12,8 @@ jobs:
 #        - ./apt-cyg install nano
         - choco install cygwin
         - ls c:/tools/cygwin
-        - ls c:\tools\cygwin
         - choco install cyg-get
-        - chmod +x cyg-get
+        - where cyg-get
         - cyg-get make
         - ls
 #        - "travis_wait 50 make"
