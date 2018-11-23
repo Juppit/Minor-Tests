@@ -7,16 +7,14 @@ jobs:
           packages: 
             - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
       script:
-#        - wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg
-#        - chmod +x apt-cyg
-#        - ./apt-cyg install nano
         - choco install cygwin
-        - ls c:/tools/cygwin
         - choco install cyg-get
         - where cyg-get
         - ls C:/ProgramData/chocolatey/bin/cyg-get*
         - cyg-get.bat make
         - ls
+        - ls c:/tools/cygwin
+        - make --version
 #        - "travis_wait 50 make"
         - ls /bin
         - ls /usr/bin
