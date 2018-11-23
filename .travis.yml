@@ -2,6 +2,10 @@ language: c
 jobs:
   include:
     - os: windows
+      addons: 
+        apt:
+          packages: 
+            - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
       script:
         - ls /bin
         - ls /usr/bin
