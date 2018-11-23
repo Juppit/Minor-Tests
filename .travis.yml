@@ -16,8 +16,8 @@ jobs:
         - ls
         - ls c:/tools/cygwin
         - ls c:/tools/cygwin/bin
-        - make --version
-#        - "travis_wait 50 make"
+        - c:/tools/cygwin/bin/make --version
+        - "travis_wait 50 c:/tools/cygwin/bin/make"
         - ls /bin
         - ls /usr/bin
         - echo $PATH
