@@ -10,7 +10,7 @@ jobs:
         - wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg
         - ls
         - chmod +x apt-cyg
-        - apt-cyg install nano
+        - ./apt-cyg install nano
         - ls /bin
         - ls /usr/bin
         - echo $PATH
