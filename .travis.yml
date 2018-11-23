@@ -9,18 +9,19 @@ jobs:
       script:
         - choco install cygwin
         - choco install cyg-get
-        - where cyg-get
-        - ls C:/ProgramData/chocolatey/bin/cyg-get*
+        - ls c:/tools/cygwin/bin/mak*
         - cyg-get.bat install make
+        - ls c:/tools/cygwin/bin/mak*
         - where make
         - ls
         - ls c:/tools/cygwin
         - ls c:/tools/cygwin/bin
         - c:/tools/cygwin/bin/make --version
-        - "travis_wait 50 c:/tools/cygwin/bin/make"
-        - ls /bin
-        - ls /usr/bin
-        - echo $PATH
+        - cyg-get.bat bsdtar gperf texinfo help2man gcc-multilib g++-multilib
+#        - "travis_wait 50 c:/tools/cygwin/bin/make"
+#        - ls /bin
+#        - ls /usr/bin
+#        - echo $PATH
     - os: linux
       dist: trusty
       addons: 
