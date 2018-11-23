@@ -10,8 +10,12 @@ jobs:
 #        - wget rawgit.com/transcode-open/apt-cyg/master/apt-cyg
 #        - chmod +x apt-cyg
 #        - ./apt-cyg install nano
+        - choco install cygwin
+        - choco install cyg-get
+        - chmod +x cyg-get
+        - cyg-get make
         - ls
-        - "travis_wait 50 cmake"
+        - "travis_wait 50 make"
         - ls /bin
         - ls /usr/bin
         - echo $PATH
