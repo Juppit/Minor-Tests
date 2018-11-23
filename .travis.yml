@@ -14,7 +14,8 @@ jobs:
         - ls c:/tools/cygwin
         - choco install cyg-get
         - where cyg-get
-        - cyg-get make
+        - ls C:/ProgramData/chocolatey/bin/cyg-get*
+        - cyg-get.bat make
         - ls
 #        - "travis_wait 50 make"
         - ls /bin
