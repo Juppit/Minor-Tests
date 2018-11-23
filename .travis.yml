@@ -1,7 +1,9 @@
-sudo: false
 language: c
 jobs:
   include:
+    - os: windows
+      script:
+        - "travis_wait 50 make"
     - os: linux
       dist: trusty
       addons: 

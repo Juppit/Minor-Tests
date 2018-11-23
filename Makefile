@@ -11,7 +11,7 @@ else
     ARCH := 32
 endif
 
-BUILD_OS :=
+BUILD :=
 CURSES_MINGW_BUILD :=
 
 BUILD_OS := $(PLATFORM)
@@ -20,14 +20,14 @@ ifeq ($(OS),Windows_NT)
         BUILD_OS := Mingw$(ARCH)
         BUILDPATH := /mingw$(ARCH)/bin:$(BUILDPATH)
         # on Mingw only for CURSES necessary
-        BUILD_OS :=
+        BUILD :=
         CURSES_MINGW_BUILD := --build=x86_64-pc-mingw$(ARCH)
     endif
     ifneq (,$(findstring MINGW64,$(PLATFORM)))
         BUILD_OS := Mingw$(ARCH)
         BUILDPATH := /mingw$(ARCH)/bin:$(BUILDPATH)
         # on Mingw only for CURSES necessary
-        BUILD_OS :=
+        BUILD :=
         CURSES_MINGW_BUILD := --build=x86_64-pc-mingw$(ARCH)
     endif
     ifneq (,$(findstring MSYS,$(PLATFORM)))
@@ -37,12 +37,12 @@ ifeq ($(OS),Windows_NT)
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
         # on Cygwin necessary for GMP and GDB
-        BUILD_OS := --build=x86_64-unknown-cygwin
+        BUILD := --build=x86_64-unknown-cygwin
     endif
     ifneq (,$(findstring Cygwin,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
         # on Cygwin necessary for GMP and GDB
-        BUILD_OS := --build=x86_64-unknown-cygwin
+        BUILD := --build=x86_64-unknown-cygwin
     endif
 else
     ifeq ($(PLATFORM),Darwin)
@@ -140,28 +140,32 @@ RM       := rm -f
 RMDIR    := rm -R -f
 MOVE     := mv -f
 UNTAR    := bsdtar -xf
+UNZIP    := unzip -qo
 MAKE_OPT := V=1 -s
 CONF_OPT := configure -q
 INST_OPT := install -s
 
+#BUILD_OS := Linux
+
+ZIP_DIR_OPT = -d
+ifeq (,$(findstring Linux,$(BUILD_OS)))
+	UNZIP = $(UNTAR)
+	ZIP_DIR_OPT = -C
+endif
+
 .PHONY: build-1
 
+#	$(info Detected: $(BUILD_OS) on $(OS))
+#	$(info Processors: $(NUMBER_OF_PROCESSORS))
+#	@echo "Build:     $(BUILD_OS)"
+#	@echo "BuildPath: $(BUILDPATH)"
 all:
-	$(info Detected: $(BUILD_OS) on $(OS))
-	$(info Processors: $(NUMBER_OF_PROCESSORS))
-	@echo "Build:     $(BUILD_OS)"
-	@echo "BuildPath: $(BUILDPATH)"
 	@echo "Platform:  $(PLATFORM)"
 	@mkdir -p $(DIST_DIR)
 	@date > $(BUILD_LOG)
 	@date > $(ERROR_LOG)
-    ifneq (,$(findstring CYGWIN,$(BUILD_OS)))
-		@echo BUILD_OS ist: $(BUILD_OS)
-    endif
-    ifneq (,$(findstring Cygwin,$(BUILD_OS)))
-		@echo Build ist: $(BUILD_OS)
-    endif
-	$(MAKE) build-1
+	@echo Build ist: $(BUILD_OS)
+	@$(MAKE) build-1
 
 build-1: $(TOOLCHAIN) gcc
 
@@ -182,11 +186,9 @@ gmp: $(TOOLCHAIN)
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
 
 gcc: $(TOOLCHAIN)
-	echo $(GCC)-$(GCC_VERSION)
-	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
-	date
-	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).extracted
-	date
+	@echo $(GCC)-$(GCC_VERSION)
+	@make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+	@make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).extracted
 
 gcc1: $(TOOLCHAIN)
 #   GCC_URL = https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip
@@ -238,22 +240,19 @@ gcc1: $(TOOLCHAIN)
 
 
 define Load_Modul
-	@$(MKDIR) $(TAR_DIR)
-	@if ! test -s $3; then echo "##########################"; fi
-	@if ! test -s $3; then echo "#### Load $1..." | tee -a $(ERROR_LOG); fi
-	@if ! test -s $3; then $(WGET) $2 --output-document $3 && $(RM) $(SOURCE_DIR)/.$1.*ed; fi
-	@touch $(SOURCE_DIR)/.$1.loaded
+    @$(MKDIR) $(TAR_DIR)
+    @if ! test -s $3; then echo "##########################"; fi
+    @if ! test -s $3; then echo "#### Load $1..." | tee -a $(ERROR_LOG); fi
+    @if ! test -s $3; then $(WGET) $2 --output-document $3 && $(RM) $(SOURCE_DIR)/.$1.*ed; fi
+    @touch $(SOURCE_DIR)/.$1.loaded
 endef
 
 define Extract_Modul
     @if ! test -f $(SOURCE_DIR)/.$1-$2.extracted; then echo "$(STRIPLINE)"; fi
     @if ! test -f $(SOURCE_DIR)/.$1-$2.extracted; then echo "$(STRIP) Extract $1..." | tee -a $(ERROR_LOG); fi
-    @#### Extract: if not exist $(SOURCE_DIR)/.$1.extracted then $(RMDIR) $3 && untar/unzip $4 and mv to $3
-    @#### on linux bsdtar dosn't work if zip archives are not set up properly
-    if (! test -f $(SOURCE_DIR)/.$1-$2.extracted) && (  test -f $(basename $4).zip) && (test -z $(findstring Linux,$(BUILD_OS))); \
-       then $(RMDIR) $3 && $(UNZIP) $4 -d $(SOURCE_DIR); fi
-    if (! test -f $(SOURCE_DIR)/.$1-$2.extracted) && ((! test -f $(basename $4).zip) || (test -n $(findstring Linux,$(BUILD_OS)))); \
-       then $(RMDIR) $3 && $(UNTAR) $4 -C $(SOURCE_DIR); fi
+    @if ( test -f $(basename $4).gz)  && (! test -f $(SOURCE_DIR)/.$1-$2.extracted); then $(RMDIR) $3 && $(UNTAR) $4 -C $(SOURCE_DIR); fi
+    @if ( test -f $(basename $4).bz2) && (! test -f $(SOURCE_DIR)/.$1-$2.extracted); then $(RMDIR) $3 && $(UNTAR) $4 -C $(SOURCE_DIR); fi
+    @if ( test -f $(basename $4).zip) && (! test -f $(SOURCE_DIR)/.$1-$2.extracted); then $(RMDIR) $3 && $(UNZIP) $4 $(ZIP_DIR_OPT) $(SOURCE_DIR); fi
     -@if (! test -f $(SOURCE_DIR)/.$1-$2.extracted) && (! test -f $3); then $(MOVE) $(SOURCE_DIR)/$5 $3; fi
     @touch $(SOURCE_DIR)/.$1-$2.extracted
 endef
@@ -268,33 +267,34 @@ define Untar_Modul
 endef
 
 define Config_Modul
-	@echo "##########################"
-	@echo "#### Config $1..." | tee -a $(ERROR_LOG)
-	+@if ! test -f $(SOURCE_DIR)/.$1.patched; then $(MAKE) $(MAKE_OPT) $1_patch && touch $(SOURCE_DIR)/.$1.patched; fi
-	@$(MKDIR) $2
-	@##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
-	PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
-	@touch $(SOURCE_DIR)/.$1.configured
+    @echo "##########################"
+    @echo "#### Config $1..." | tee -a $(ERROR_LOG)
+    +@if ! test -f $(SOURCE_DIR)/.$1.patched; then $(MAKE) $(MAKE_OPT) $1_patch && touch $(SOURCE_DIR)/.$1.patched; fi
+    @$(MKDIR) $2
+    @##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
+    PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
+    @touch $(SOURCE_DIR)/.$1.configured
 endef
 
 define Build_Modul
-	@echo "##########################"
-	@echo "#### Build $1..." | tee -a $(ERROR_LOG)
-	@#### Build: Path=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2
-	@#### for '+' token see https://www.gnu.org/software/make/manual/html_node/Error-Messages.html
-	+PATH=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2 $(QUIET)
-	@touch $(SOURCE_DIR)/.$1.builded
+    @echo "##########################"
+    @echo "#### Build $1..." | tee -a $(ERROR_LOG)
+    @#### Build: Path=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2
+    @#### for '+' token see https://www.gnu.org/software/make/manual/html_node/Error-Messages.html
+    +PATH=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2 $(QUIET)
+    @touch $(SOURCE_DIR)/.$1.builded
 endef
 
 define Install_Modul
-	@echo "##########################"
-	@echo "#### Install $1..." | tee -a $(ERROR_LOG)
-	@echo "##########################"
-	@#### "Install: Path=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3=$(INST_OPT) -C $2"
-	+PATH=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3 -C $2 $(QUIET)
-	@$(OUTPUT_DATE)
-	@touch $(SOURCE_DIR)/.$1.installed
+    @echo "##########################"
+    @echo "#### Install $1..." | tee -a $(ERROR_LOG)
+    @echo "##########################"
+    @#### "Install: Path=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3=$(INST_OPT) -C $2"
+    +PATH=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3 -C $2 $(QUIET)
+    @$(OUTPUT_DATE)
+    @touch $(SOURCE_DIR)/.$1.installed
 endef
+
 define Modul_Load
    @if ! ./Load_Modul.sh $1 $2 $3; then echo "#### $1 exitiert bereits"; fi
 endef
