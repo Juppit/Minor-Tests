@@ -219,7 +219,7 @@ gcc: $(TOOLCHAIN)
     else
 	@date
 	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
-	@ls -l $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR) $(TAR_DIR)
     endif
 	@date
 	@echo .
@@ -229,17 +229,17 @@ gcc: $(TOOLCHAIN)
 	@date
 	@echo .
 	@echo ================
-	@ls -l $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 #	bsdtar --version
 
 
 #*******************************************
 #************ submodul section *************
 #*******************************************
-%.extracted: %.zip
-	unzip -q $<
-%.extracted: %.tar.gz
-	$(UNTAR) $<
+##%.extracted: %.zip
+##	unzip -q $<
+##%.extracted: %.tar.gz
+##	$(UNTAR) $<
 
 
 define Load_Modul
