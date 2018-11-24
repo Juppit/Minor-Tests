@@ -217,15 +217,15 @@ gcc: $(TOOLCHAIN)
 	@echo no Linux
 	-unzip -qo $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
-	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
-	ls -l $(SOURCE_DIR)
+#	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+#	ls -l $(SOURCE_DIR)
     endif
 #	@echo ================
 #	git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
 	@echo ================
 	ls -l $(SOURCE_DIR)
 	where bsdtar
-	bsdtar --version
+#	bsdtar --version
 
 
 #*******************************************
