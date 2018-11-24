@@ -207,7 +207,7 @@ gcc: $(TOOLCHAIN)
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
 	@echo Linux
-	-unzip $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	-unzip -qo $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
 	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
