@@ -201,8 +201,8 @@ gcc: $(TOOLCHAIN)
 	echo .
 	echo ================
 	date
-	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
-	date
+#	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+#	date
 	echo .
 	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/wget-xtensa-master.zip
 	date
