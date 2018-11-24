@@ -4,6 +4,8 @@ jobs:
     - os: windows
       script:
          - echo $PATH
+         - ls /
+         - ls /ProgramData/chocolatey/
          - ls /ProgramData/chocolatey/lib/mingw/tools/install/mingw64/
          - ls /ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin
          - ls /ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/x86_64-w64-mingw32
