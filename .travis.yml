@@ -5,11 +5,8 @@ jobs:
       script:
 #         - echo $PATH
          - pwd
-         - mkdir src
-         - ls
-         - ls src
+         - ls "C:/Users/travis/build/Juppit/Minor-Tests"
          - mingw32-make
-         - ls -a . distrib
          - tail distrib/*build.log
          - tail distrib/*error.log
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
