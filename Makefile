@@ -204,10 +204,10 @@ gcc: $(TOOLCHAIN)
 #	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
 #	date
 	@echo .
-	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/wget-xtensa-master.zip
+	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/gcc-xtensa-master.zip
 	@date
 	@echo
-	@ls -l $(TAR_DIR)
+	ls -l $(TAR_DIR)
 	@echo .
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
