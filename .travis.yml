@@ -4,9 +4,8 @@ jobs:
     - os: windows
       script:
 #         - echo $PATH
-         - pwd
-         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests"
          - mingw32-make
+         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/tarballs"
          - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
          - tail distrib/*build.log
          - tail distrib/*error.log
