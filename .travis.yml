@@ -5,16 +5,12 @@ jobs:
       script:
          - echo $PATH
          - touch .tested
-         - ls
-         - ls /usr/bin
+         - ls -a
          - mingw32-make MAKE_OPT=""
-         - ls . distrib
+         - ls -a . distrib
          - tail distrib/*build.log
          - tail distrib/*error.log
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
-#        - ls /bin
-#        - ls /usr/bin
-#        - echo $PATH
     - os: linux
       dist: trusty
       addons: 
