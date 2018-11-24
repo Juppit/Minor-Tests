@@ -4,9 +4,8 @@ jobs:
     - os: windows
       script:
          - echo $PATH
-         - touch .tested
-         - ls -a
-         - mingw32-make MAKE_OPT=""
+         - ls src
+         - mingw32-make MAKE_OPT=-V
          - ls -a . distrib
          - tail distrib/*build.log
          - tail distrib/*error.log
