@@ -142,8 +142,11 @@ MOVE     := mv -f
 UNTAR    := bsdtar -xf
 UNZIP    := unzip -qo
 MAKE_OPT := V=1 -s
+MAKE_OPT :=
 CONF_OPT := configure -q
+CONF_OPT := configure
 INST_OPT := install -s
+INST_OPT := install
 
 #BUILD_OS := Linux
 
@@ -170,13 +173,13 @@ all:
 build-1: $(TOOLCHAIN) gcc
 
 $(SOURCE_DIR):
-	@mkdir -p $(SOURCE_DIR)
+	mkdir -p $(SOURCE_DIR)
 $(TAR_DIR):
-	@mkdir -p $(TAR_DIR)
+	mkdir -p $(TAR_DIR)
 $(DIST_DIR):
-	@$(MKDIR) $(DIST_DIR)
+	$(MKDIR) $(DIST_DIR)
 $(COMP_LIB):
-	@$(MKDIR) $(COMP_LIB)
+	$(MKDIR) $(COMP_LIB)
 $(TOOLCHAIN): $(SOURCE_DIR) $(DIST_DIR) $(TAR_DIR) $(COMP_LIB)
 
 $(GMP)_patch:

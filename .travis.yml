@@ -5,9 +5,10 @@ jobs:
       script:
 #         - echo $PATH
          - pwd
+         - mkdir src
          - ls
          - ls src
-         - mingw32-make MAKE_OPT=-V
+         - mingw32-make
          - ls -a . distrib
          - tail distrib/*build.log
          - tail distrib/*error.log
