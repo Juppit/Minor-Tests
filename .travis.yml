@@ -6,11 +6,14 @@ jobs:
         - choco install cygwin
         - choco install cyg-get
         - "ls c:/tools/cygwin/bin/mak*"
-        - cyg-get.bat bsdtar gperf
+        - "ls c:/tools/cygwin/bin/bsdtar*"
+        - cyg-get.bat make
+        - "ls c:/tools/cygwin/bin/mak*"
+        - cyg-get.bat bsdtar
+        - "ls c:/tools/cygwin/bin/bsdtar*"
+        - cyg-get.bat gperf
         - cyg-get.bat texinfo help2man
         - cyg-get.bat gcc-multilib g++-multilib
-        - pwd
-        - "c:/tools/cygwin/cygwin.bat"
         - pwd
         - "c:/tools/cygwin/bin/make.exe --version"
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
