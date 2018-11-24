@@ -200,11 +200,11 @@ gcc: $(TOOLCHAIN)
 #   GCC_VERSION = xtensa
 	@echo ================
 	@date
-#	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
 #	date
-	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/gcc-xtensa-master.zip
-	ls -l $(TAR_DIR)
-	@echo ================
+#	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/gcc-xtensa-master.zip
+#	ls -l $(TAR_DIR)
+#	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
 	@echo Linux
 	-unzip -qo $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
@@ -215,7 +215,7 @@ gcc: $(TOOLCHAIN)
 	-unzip -qo $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
     else
 	@echo no Linux
-	-unzip -qo $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+#	-unzip -qo $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
 #	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 #	ls -l $(SOURCE_DIR)
@@ -226,7 +226,7 @@ gcc: $(TOOLCHAIN)
 	ls -l $(SOURCE_DIR)
 #	where bsdtar
 #	bsdtar --version
-	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).configured
 
 
 #*******************************************
