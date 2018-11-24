@@ -203,10 +203,10 @@ gcc: $(TOOLCHAIN)
 #	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
 #	date
 	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/gcc-xtensa-master.zip
-	ls -la $(TAR_DIR)
+	ls -l $(TAR_DIR)
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
-	date
+	@echo Linux
 	-unzip $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
 	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
@@ -214,6 +214,9 @@ gcc: $(TOOLCHAIN)
 #	date
 	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
     else
+	@echo no Linux
+	-unzip $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
     endif
