@@ -4,7 +4,7 @@ jobs:
     - os: windows
       script:
           - wget "https://sourceforge.net/projects/mingw/files/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip/download"
-          - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip/download
+          - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
           - ls -l 
           - bsdtar --version
 #         - echo $PATH
