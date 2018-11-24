@@ -2,17 +2,16 @@ language: c
 jobs:
   include:
     - os: windows
-      addons: 
-        apt:
-          packages: 
-            - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
       script:
         - choco install cygwin
         - choco install cyg-get
-        - cyg-get.bat install make
         - "ls c:/tools/cygwin/bin/mak*"
-        - where make.exe
-        - cyg-get.bat bsdtar gperf texinfo help2man gcc-multilib g++-multilib
+        - cyg-get.bat bsdtar gperf
+        - cyg-get.bat texinfo help2man
+        - cyg-get.bat gcc-multilib g++-multilib
+        - pwd
+        - "c:/tools/cygwin/cygwin.bat"
+        - pwd
         - "c:/tools/cygwin/bin/make.exe --version"
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
 #        - ls /bin
