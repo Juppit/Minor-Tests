@@ -12,12 +12,9 @@ jobs:
         - ls c:/tools/cygwin/bin/mak*
         - cyg-get.bat install make
         - ls c:/tools/cygwin/bin/mak*
-        - where make
-        - ls
-        - ls c:/tools/cygwin
-        - ls c:/tools/cygwin/bin
-        - c:/tools/cygwin/bin/make --version
+        - where make.exe
         - cyg-get.bat bsdtar gperf texinfo help2man gcc-multilib g++-multilib
+        - c:/tools/cygwin/bin/make.exe --version
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
 #        - ls /bin
 #        - ls /usr/bin
