@@ -168,7 +168,7 @@ all:
 	@date > $(BUILD_LOG)
 	@date > $(ERROR_LOG)
 	@echo Build ist: $(BUILD_OS)
-	@$(MAKE) build-1
+	$(MAKE) build-1
 
 build-1: $(TOOLCHAIN) gcc
 
@@ -198,39 +198,39 @@ gcc: $(TOOLCHAIN)
 #   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
 #   GCC_TAR_DIR = gcc-xtensa-master
 #   GCC_VERSION = xtensa
-	@echo .
-	@echo ================
-	@date
-	@make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
-	@date
-	@echo .
+	echo .
+	echo ================
+	date
+	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+	date
+	echo .
 	$(WGET) https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip --output-document $(TAR_DIR)/wget-xtensa-master.zip
-	@date
-	@echo
+	date
+	echo
 	ls -l $(TAR_DIR)
-	@echo .
-	@echo ================
+	echo .
+	echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
-	@date
+	date
 	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
-	@date
+	date
 	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
     else
-	@date
+	date
 	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR)
     endif
-	@date
-	@echo .
-	@echo ================
-	@date
+	date
+	echo .
+	echo ================
+	date
 	#git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
-	@date
-	@echo .
-	@echo ================
+	date
+	echo .
+	echo ================
 	ls -l $(SOURCE_DIR)
-	@bsdtar --version
+	bsdtar --version
 
 
 #*******************************************
