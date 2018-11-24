@@ -3,7 +3,9 @@ jobs:
   include:
     - os: windows
       script:
-         - echo $PATH
+#         - echo $PATH
+         - pwd
+         - ls
          - ls src
          - mingw32-make MAKE_OPT=-V
          - ls -a . distrib
