@@ -4,14 +4,13 @@ jobs:
     - os: windows
       script:
          - echo $PATH
-         - ls /
-         - ls /c/ProgramData/chocolatey/
+         - ls /usr
          - ls /c/ProgramData/chocolatey/tools
          - ls /c/ProgramData/chocolatey/bin
 #         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/x86_64-w64-mingw32
-         - ls /mingw64/bin
+#         - ls /mingw64/bin
 #         - where mingw32-make
-         - mingw32-make
+         - mingw32-make MAKE_OPT=""
          - ls
 #         - /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/make
 #         - bash --login -c make
