@@ -7,6 +7,7 @@ jobs:
          - pwd
          - ls "C:/Users/travis/build/Juppit/Minor-Tests"
          - mingw32-make
+         - ls "C:/Users/travis/build/Juppit/Minor-Tests/src"
          - tail distrib/*build.log
          - tail distrib/*error.log
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
