@@ -6,7 +6,8 @@ jobs:
          - echo $PATH
          - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/
          - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin
-         - /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/make
+         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/x86_64-w64-mingw32
+#         - /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/make
 #         - bash --login -c make
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
 #        - ls /bin
