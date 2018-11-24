@@ -188,12 +188,14 @@ gmp: $(TOOLCHAIN)
 	echo "Parameter BUILD_TRIPPEL: $(BUILD_TRIPPEL)"
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
 
-gcc0: $(TOOLCHAIN)
-	echo $(GCC)-$(GCC_VERSION)
-	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
-	make $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).extracted
-
 gcc: $(TOOLCHAIN)
+	echo $(GCC)-$(GCC_VERSION)
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).extracted
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).configured
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).builded
+
+gcc1: $(TOOLCHAIN)
 #   GCC_URL = https://github.com/jcmvbkbc/gcc-xtensa/archive/master.zip
 #   GCC_TAR = $(TAR_DIR)/gcc-xtensa-master.zip
 #   GCC_TAR_DIR = gcc-xtensa-master

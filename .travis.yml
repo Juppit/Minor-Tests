@@ -5,10 +5,10 @@ jobs:
       script:
 #         - echo $PATH
          - mingw32-make
-#         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/tarballs"
+         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/tarballs"
          - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
-         - tail distrib/*build.log
-         - tail distrib/*error.log
+#         - tail distrib/*build.log
+#         - tail distrib/*error.log
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
     - os: linux
       dist: trusty
