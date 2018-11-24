@@ -5,7 +5,7 @@ jobs:
       script:
 #         - echo $PATH
          - mingw32-make
-         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/tarballs"
+#         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/tarballs"
          - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
          - tail distrib/*build.log
          - tail distrib/*error.log

@@ -224,8 +224,9 @@ gcc: $(TOOLCHAIN)
 #	git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
 	@echo ================
 	ls -l $(SOURCE_DIR)
-	where bsdtar
+#	where bsdtar
 #	bsdtar --version
+	$(MAKE) $(SOURCE_DIR)/.$(GCC)-$(GCC_VERSION).loaded
 
 
 #*******************************************
