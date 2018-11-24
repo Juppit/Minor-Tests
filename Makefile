@@ -207,18 +207,20 @@ gcc: $(TOOLCHAIN)
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
 	date
+	-unzip $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
-	ls -la $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 #	date
 	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
     else
 	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
-	ls -la $(SOURCE_DIR) $(TAR_DIR)
+	ls -l $(SOURCE_DIR)
     endif
 #	@echo ================
 #	git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
 	@echo ================
-	ls -la $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 	where bsdtar
 	bsdtar --version
 
