@@ -7,8 +7,6 @@ jobs:
          - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
          - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
          - mv basic-bsdtar.exe /usr/bin/bsdtar.exe 
-         - ls -l 
-         - bsdtar --version
          - mingw32-make
          - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/tarballs"
          - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"

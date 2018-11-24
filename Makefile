@@ -139,14 +139,11 @@ MKDIR    := mkdir -p
 RM       := rm -f
 RMDIR    := rm -R -f
 MOVE     := mv -f
-UNTAR    := bsdtar -vxf
-UNZIP    := unzip -o
+UNTAR    := bsdtar -xf
+UNZIP    := unzip -qo
 MAKE_OPT := V=1 -s
-MAKE_OPT :=
 CONF_OPT := configure -q
-CONF_OPT := configure
 INST_OPT := install -s
-INST_OPT := install
 
 #BUILD_OS := Linux
 
