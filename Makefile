@@ -139,8 +139,8 @@ MKDIR    := mkdir -p
 RM       := rm -f
 RMDIR    := rm -R -f
 MOVE     := mv -f
-UNTAR    := bsdtar -xf
-UNZIP    := unzip -qo
+UNTAR    := bsdtar -vxf
+UNZIP    := unzip -o
 MAKE_OPT := V=1 -s
 MAKE_OPT :=
 CONF_OPT := configure -q
@@ -208,29 +208,22 @@ gcc: $(TOOLCHAIN)
 	@date
 	@echo
 	ls -l $(TAR_DIR)
-	@echo .
 	@echo ================
     ifneq (,$(findstring Linux,$(BUILD_OS)))
 	date
-#	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
-#	ls -l $(SOURCE_DIR)
+	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+	ls -l $(SOURCE_DIR)
 #	date
 	-unzip -q $(TAR_DIR)/gcc-xtensa-master.zip -d $(SOURCE_DIR)
     else
-	@date
-	-bsdtar -xf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
+	-bsdtar -vxf $(TAR_DIR)/gcc-xtensa-master.zip -C $(SOURCE_DIR)
 	ls -l $(SOURCE_DIR) $(TAR_DIR)
     endif
-	@date
-	@echo .
 	@echo ================
-	@date
 	#git clone https://github.com/jcmvbkbc/gcc-xtensa $(SOURCE_DIR)/gcc-xtensa-git
-	@date
-	@echo .
 	@echo ================
 	ls -l $(SOURCE_DIR)
-#	bsdtar --version
+	bsdtar --version
 
 
 #*******************************************
