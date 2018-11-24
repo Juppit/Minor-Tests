@@ -3,10 +3,11 @@ jobs:
   include:
     - os: windows
       script:
-         - choco install mingw
          - echo $PATH
-#         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
-         - bash --login -c make
+         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/
+         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin
+         - /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/usr/bin/make
+#         - bash --login -c make
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
 #        - ls /bin
 #        - ls /usr/bin
