@@ -4,8 +4,7 @@ jobs:
     - os: windows
       script:
          - echo $PATH
-         - ls
-         - PATH: C:\msys64\usr\bin
+         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
          - bash --login -c make
 #        - "travis_wait 50 c:/tools/cygwin/bin/make"
 #        - ls /bin
