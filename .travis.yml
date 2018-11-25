@@ -3,8 +3,9 @@ jobs:
   include:
     - os: windows
       script:
-#         - echo $PATH
-         - ls /mingw64/bin /mingw64/usr/bin
+         - echo $PATH
+         - ls /mingw64
+         - ls /mingw64/bin /mingw64/usr
          - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
          - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
          - mv basic-bsdtar.exe /usr/bin/bsdtar.exe 
