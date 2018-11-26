@@ -6,7 +6,8 @@ jobs:
 #        - ls "C:\ProgramData\chocolatey\bin"
 #        - ls "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
 #        - where cc
-        - where gcc
+#        - where gcc
+        - ls / /usr /usr/bin
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
