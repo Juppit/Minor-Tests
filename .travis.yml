@@ -9,7 +9,7 @@ jobs:
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
-        - CC = "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe"
+        - CC="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe"
         - "travis_wait 50 mingw32-make"
         - cat src/gmp-*/build-Msys64/config.log
     # - os: linux
