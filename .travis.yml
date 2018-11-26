@@ -13,11 +13,13 @@ jobs:
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
         - wget "https://netcologne.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-bin.zip"
         - unzip m4-1.4.14-1-bin.zip
-        - mv bin/m4.exe /usr/bin
-        - ls -l /usr/bin/m4*
+        - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip"
+        - unzip m4-1.4.14-1-dep.zip
+        - mv bin/* /usr/bin
+        - ls -l bin
         #- CC="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe"
-        #- "travis_wait 50 mingw32-make"
-        #- cat src/gmp-*/build-Msys64/config.log
+        - "travis_wait 50 mingw32-make"
+        - cat src/gmp-*/build-Msys64/config.log
     # - os: linux
       # dist: trusty
       # addons: 
