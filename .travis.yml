@@ -39,8 +39,8 @@ after_script:
 on_failure:
   - tail -20 distrib/*error.log
 before_install:
-  - test -n $CC  && unset CC
-  - test -n $CXX && unset CXX
+#  - test -n $CC  && unset CC
+#  - test -n $CXX && unset CXX
 deploy: 
   api_key: $CheckCIDeploy
   file: distrib/*
