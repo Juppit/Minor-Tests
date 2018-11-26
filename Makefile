@@ -3,6 +3,7 @@
 # Last edit: 21.06.2018
 
 BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+BUILDPATH = $(PATH)
 
 PLATFORM := $(shell uname -s)
 ifneq (,$(findstring 64, $(shell uname -m)))
@@ -278,8 +279,8 @@ define Config_Modul
     @echo "#### Config $1..." | tee -a $(ERROR_LOG)
     +@if ! test -f $(SOURCE_DIR)/.$1.patched; then $(MAKE) $(MAKE_OPT) $1_patch && touch $(SOURCE_DIR)/.$1.patched; fi
     @$(MKDIR) $2
-    @##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
-    PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
+    ##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
+    +PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
     @touch $(SOURCE_DIR)/.$1.configured
 endef
 
