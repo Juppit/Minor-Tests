@@ -186,7 +186,7 @@ $(TOOLCHAIN): $(SOURCE_DIR) $(DIST_DIR) $(TAR_DIR) $(COMP_LIB)
 $(GMP)_patch:
 
 gmp: $(TOOLCHAIN)
-	@echo "BUILD_TRIPPEL: $(BUILD_TRIPPEL)"
+	@echo $(GMP)-$(GMP_VERSION)
 	@echo "Path:          $(PATH)"
 	@echo "BuildPath:     $(BUILDPATH)"
 	@echo "gccPath: "
@@ -279,8 +279,9 @@ define Config_Modul
     @echo "#### Config $1..." | tee -a $(ERROR_LOG)
     +@if ! test -f $(SOURCE_DIR)/.$1.patched; then $(MAKE) $(MAKE_OPT) $1_patch && touch $(SOURCE_DIR)/.$1.patched; fi
     @$(MKDIR) $2
-    ##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
-    +PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
+    @##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
+    @#####+PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
+    cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
     @touch $(SOURCE_DIR)/.$1.configured
 endef
 
