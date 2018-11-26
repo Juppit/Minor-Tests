@@ -7,13 +7,13 @@ jobs:
 #        - ls "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
 #        - where cc
 #        - where gcc
-        - ls /bin/b* /usr/bin/b*
+#        - ls /bin/b* /usr/bin/b*
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
         - wget "https://netcologne.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-bin.zip"
         - unzip m4-1.4.14-1-bin.zip
-        - bin/m4.exe
+        - mv bin/m4.exe /usr/bin
         #- CC="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe"
         - "travis_wait 50 mingw32-make"
         - cat src/gmp-*/build-Msys64/config.log
