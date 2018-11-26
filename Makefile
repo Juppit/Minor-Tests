@@ -32,7 +32,8 @@ ifeq ($(OS),Windows_NT)
     endif
     ifneq (,$(findstring MSYS,$(PLATFORM)))
         BUILD_OS := MSYS$(ARCH)
-        BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
+        #BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
+        BUILDPATH := /ProgramData/Chocolatey/bin:/usr/bin:$(BUILDPATH)
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
@@ -167,7 +168,7 @@ all:
 	@echo Build ist: $(BUILD_OS)
 	$(MAKE) build-1
 
-build-1: $(TOOLCHAIN) gcc
+build-1: $(TOOLCHAIN) gmp
 
 $(SOURCE_DIR):
 	mkdir -p $(SOURCE_DIR)
@@ -182,8 +183,14 @@ $(TOOLCHAIN): $(SOURCE_DIR) $(DIST_DIR) $(TAR_DIR) $(COMP_LIB)
 $(GMP)_patch:
 
 gmp: $(TOOLCHAIN)
-	echo "Parameter BUILD_TRIPPEL: $(BUILD_TRIPPEL)"
+	@echo "BUILD_TRIPPEL: $(BUILD_TRIPPEL)"
+	@echo "Path:          $(PATH)"
+	@echo "BuildPath:     $(BUILDPATH)"
+	@echo "gccPath: "
+	where gcc
+	@$(MAKE) $(SOURCE_DIR)/.$(GMP).loaded
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
+	@$(MAKE) $(SOURCE_DIR)/.$(GMP).configured
 
 gcc: $(TOOLCHAIN)
 	echo $(GCC)-$(GCC_VERSION)
