@@ -3,7 +3,7 @@
 # Last edit: 21.06.2018
 
 BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-BUILDPATH = $(PATH)
+BUILDPATH = "$(PATH)"
 
 PLATFORM := $(shell uname -s)
 ifneq (,$(findstring 64, $(shell uname -m)))
