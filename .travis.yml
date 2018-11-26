@@ -3,32 +3,32 @@ jobs:
   include:
     - os: windows
       script:
-        - ls "C:\ProgramData\chocolatey\bin"
-        - ls "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
+#        - ls "C:\ProgramData\chocolatey\bin"
+#        - ls "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
         - where gcc
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe 
         - "travis_wait 50 mingw32-make"
         - cat src/gmp-*/build-Msys64/config.log
-    - os: linux
-      dist: trusty
-      addons: 
-        apt:
-          sources: 
-            - ubuntu-toolchain-r-test
-          packages: 
-            - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
-      script:
-         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
-#         - "travis_wait 50 make"
-    - os: osx
-      script:
-         - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
-#         - "travis_wait 50 make"
-#    - os: osx
-#      script:
-#        - make build-2
+    # - os: linux
+      # dist: trusty
+      # addons: 
+        # apt:
+          # sources: 
+            # - ubuntu-toolchain-r-test
+          # packages: 
+            # - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
+      # script:
+         # - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
+# #         - "travis_wait 50 make"
+    # - os: osx
+      # script:
+         # - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
+# #         - "travis_wait 50 make"
+# #    - os: osx
+# #      script:
+# #        - make build-2
 before_script:
   - cd $TRAVIS_BUILD_DIR
   - mkdir -p distrib

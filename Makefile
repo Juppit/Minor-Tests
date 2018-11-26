@@ -32,6 +32,7 @@ ifeq ($(OS),Windows_NT)
     endif
     ifneq (,$(findstring MSYS,$(PLATFORM)))
         BUILD_OS := MSYS$(ARCH)
+        BUILD_OS := Msys$(ARCH)
         #BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
         BUILDPATH := /ProgramData/Chocolatey/bin:/usr/bin:$(BUILDPATH)
     endif
@@ -72,7 +73,7 @@ TOP = $(PWD)
 TOOLCHAIN = $(TOP)/$(TARGET)
 TARGET_DIR = $(TOOLCHAIN)/$(TARGET)
 
-SAFEPATH = "$(TOOLCHAIN)/bin:"$(BUILDPATH)
+SAFEPATH = "$(TOOLCHAIN)/bin":$(BUILDPATH)
 
 COMP_LIB = $(TOP)/comp_libs
 SOURCE_DIR = $(TOP)/src
