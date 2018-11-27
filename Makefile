@@ -1,8 +1,8 @@
 # Author: Peter Dobler (@Juppit)
 #
-# Last edit: 21.06.2018
+# Last edit: 28.11.2018
 
-BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$(PATH)
+BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"$(PATH)"
 #BUILDPATH = "$(PATH)"
 
 PLATFORM := $(shell uname -s)
