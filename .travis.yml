@@ -1,8 +1,8 @@
-language: c
+language: bash
 jobs:
   include:
     - os: windows
-      install: make get-deps
+      #install: make get-deps
       script:
 #        - ls "C:\ProgramData\chocolatey\bin"
 #        - ls "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
