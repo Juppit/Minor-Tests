@@ -38,11 +38,8 @@ ifeq ($(OS),Windows_NT)
         BUILDPATH := /ProgramData/Chocolatey/bin:/usr/bin:$(BUILDPATH)
         BUILDPATH := /ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin:$(BUILDPATH)
         BUILDPATH := "/program files/git/usr/bin":$(BUILDPATH)
-        BUILDPATH := /tools/ruby25/bin:$(BUILDPATH)
-        BUILDPATH := /Windows/system32:$(BUILDPATH)
-        BUILDPATH := "/Program Files/CMake/bin":$(BUILDPATH)
-        BUILDPATH := "$(PATH)"
         BUILDPATH := "\tools\ruby25\bin:\Windows\system32:\Windows:\Windows\System32\Wbem:\Windows\System32\WindowsPowerShell\v1.0:\Windows\System32\OpenSSH:\ProgramData\GooGet:\Program Files\Docker:\ProgramData\chocolatey\bin:\Program Files\CMake\bin:\Program Files\dotnet:\Users\travis\AppData\Local\Microsoft\WindowsApps:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
+        BUILDPATH := /bin:/usr/bin:/ProgramData/chocolatey/bin:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
