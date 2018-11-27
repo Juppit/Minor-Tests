@@ -5,14 +5,14 @@ jobs:
       script:
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
-        - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
-        - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
+        - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
+        - mv basic-bsdtar.exe /usr/bin/bsdtar.exe >>/dev/null
         - wget "https://netcologne.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-bin.zip"
-        - unzip m4-1.4.14-1-bin.zip
-        - mv bin/m4* /usr/bin
+        - unzip m4-1.4.14-1-bin.zip >>/dev/null
+        - mv bin/m4* /usr/bin >>/dev/null
         - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip"
-        - unzip m4-1.4.14-1-dep.zip
-        - mv bin/regex* /usr/bin
+        - unzip m4-1.4.14-1-dep.zip >>/dev/null
+        - mv bin/regex* /usr/bin >>/dev/null
         - CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         - "travis_wait 50 mingw32-make"
         - cat src/gmp-*/build-Msys64/config.log
