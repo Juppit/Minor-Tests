@@ -190,10 +190,11 @@ gmp: $(TOOLCHAIN)
 	@echo "Path:          $(PATH)"
 	@echo "BuildPath:     $(BUILDPATH)"
 	@echo "gccPath: "
-	where gcc
+	#where gcc
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).loaded
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).configured
+	@$(MAKE) $(SOURCE_DIR)/.$(GMP).builded
 
 gcc: $(TOOLCHAIN)
 	echo $(GCC)-$(GCC_VERSION)
@@ -271,7 +272,7 @@ define Untar_Modul
     @#### Extract: if not exist $(SOURCE_DIR)/.$1.extracted then $(RMDIR) $3 && untar $4 and mv to $3
     @if ! test -f $(SOURCE_DIR)/.$1.extracted; then $(RMDIR) $3 && $(UNTAR) $4 -C $(SOURCE_DIR); fi
     -@if (! test -f $(SOURCE_DIR)/.$1.extracted) && (! test -f $3); then $(MOVE) $(SOURCE_DIR)/$5 $3; fi
-	@touch $(SOURCE_DIR)/.$1.extracted
+    @touch $(SOURCE_DIR)/.$1.extracted
 endef
 
 define Config_Modul
@@ -280,7 +281,7 @@ define Config_Modul
     +@if ! test -f $(SOURCE_DIR)/.$1.patched; then $(MAKE) $(MAKE_OPT) $1_patch && touch $(SOURCE_DIR)/.$1.patched; fi
     @$(MKDIR) $2
     @##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
-    @#####+PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
+    +PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
     cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
     @touch $(SOURCE_DIR)/.$1.configured
 endef
