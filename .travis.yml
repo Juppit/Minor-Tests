@@ -8,7 +8,8 @@ jobs:
        # - PATH="/bin:/usr/bin:/c/tools/ruby25/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/ProgramData/GooGet:/c/Program Files/Docker:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/Program Files/Git/cmd:/c/Program Files/LLVM/bin:/c/Program Files/dotnet:/c/Users/travis/AppData/Local/Microsoft/WindowsApps:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
        # - PATH="/bin:/usr/bin:/c/tools/ruby25/bin:/c/ProgramData/GooGet:/c/Program Files/Docker:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/Program Files/Git/cmd:/c/Program Files/LLVM/bin:/c/Program Files/dotnet:/c/Users/travis/AppData/Local/Microsoft/WindowsApps:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
        # - PATH="/bin:/usr/bin:/c/tools/ruby25/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/Program Files/Git/cmd:/c/Program Files/dotnet:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
-        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
+       # - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
+        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
         - echo $PATH
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
