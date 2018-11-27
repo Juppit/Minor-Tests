@@ -13,7 +13,7 @@ jobs:
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
       script:
-        - PATH="/bin:/usr/bin"
+        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin"
         - CC=/c/ProgramData/chocolatey/bin/gcc.exe
         - "travis_wait 50 /c/ProgramData/chocolatey/bin/mingw32-make"
        # - cat src/gmp-*/build-Msys64/config.log
