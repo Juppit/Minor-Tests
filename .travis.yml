@@ -8,18 +8,18 @@ jobs:
        # - PATH="/bin:/usr/bin:/c/tools/ruby25/bin:/c/Windows/system32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Windows/System32/OpenSSH:/c/ProgramData/GooGet:/c/Program Files/Docker:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/Program Files/Git/cmd:/c/Program Files/LLVM/bin:/c/Program Files/dotnet:/c/Users/travis/AppData/Local/Microsoft/WindowsApps:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
        # - PATH="/bin:/usr/bin:/c/tools/ruby25/bin:/c/ProgramData/GooGet:/c/Program Files/Docker:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/Program Files/Git/cmd:/c/Program Files/LLVM/bin:/c/Program Files/dotnet:/c/Users/travis/AppData/Local/Microsoft/WindowsApps:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
        # - PATH="/bin:/usr/bin:/c/tools/ruby25/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/Program Files/Git/cmd:/c/Program Files/dotnet:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
-        - PATH="/c/bin:/c/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
+        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/CMake/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
        # - PATH="/bin:/usr/bin:/ProgramData/chocolatey/bin:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
         - echo $PATH
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
-        - mv basic-bsdtar.exe /c/usr/bin/bsdtar.exe
+        - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
         - wget "https://netcologne.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-bin.zip"
         - unzip m4-1.4.14-1-bin.zip
-        - mv bin/m4* /c/usr/bin
+        - mv bin/m4* /usr/bin
         - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip"
         - unzip m4-1.4.14-1-dep.zip
-        - mv bin/regex* /c/usr/bin
+        - mv bin/regex* /usr/bin
         - CC="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe"
         # - "travis_wait 10 make"
         - "travis_wait 50 mingw32-make"
