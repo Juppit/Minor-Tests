@@ -2,8 +2,8 @@
 #
 # Last edit: 21.06.2018
 
-BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-#BUILDPATH = "$(PATH)"
+#BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+BUILDPATH = "$(PATH)"
 
 PLATFORM := $(shell uname -s)
 ifneq (,$(findstring 64, $(shell uname -m)))
@@ -41,6 +41,7 @@ ifeq ($(OS),Windows_NT)
         BUILDPATH := /tools/ruby25/bin:$(BUILDPATH)
         BUILDPATH := /Windows/system32:$(BUILDPATH)
         BUILDPATH := "/Program Files/CMake/bin":$(BUILDPATH)
+        BUILDPATH := "$(PATH)"
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
