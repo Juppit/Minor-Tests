@@ -4,13 +4,13 @@ jobs:
     - os: windows
       script:
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
-        - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
+        - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe >>/dev/null
-        - wget "https://netcologne.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-bin.zip"
+        - wget "https://netcologne.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-bin.zip" >>/dev/null
         - unzip m4-1.4.14-1-bin.zip >>/dev/null
         - mv bin/m4* /usr/bin >>/dev/null
-        - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip"
+        - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip" >>/dev/null
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
         - CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
