@@ -37,6 +37,7 @@ ifeq ($(OS),Windows_NT)
         #BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
         BUILDPATH := /ProgramData/Chocolatey/bin:/usr/bin:$(BUILDPATH)
         BUILDPATH := /ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin:$(BUILDPATH)
+		BUILDPATH := "/program files/git/usr/bin":$(BUILDPATH)
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
