@@ -287,7 +287,7 @@ define Config_Modul
     +@if ! test -f $(SOURCE_DIR)/.$1.patched; then $(MAKE) $(MAKE_OPT) $1_patch && touch $(SOURCE_DIR)/.$1.patched; fi
     @$(MKDIR) $2
     @##### Config: Path=$(SAFEPATH); cd $2 ../$(CONF_OPT) $3 $4
-    +PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
+    #+PATH=$(SAFEPATH); cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
     cd $2; ../$(CONF_OPT) $3 $4 $(QUIET)
     @touch $(SOURCE_DIR)/.$1.configured
 endef
