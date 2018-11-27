@@ -42,7 +42,7 @@ ifeq ($(OS),Windows_NT)
         BUILDPATH := /Windows/system32:$(BUILDPATH)
         BUILDPATH := "/Program Files/CMake/bin":$(BUILDPATH)
         BUILDPATH := "$(PATH)"
-        BUILDPATH := "C:\program files\git\usr\bin;C:\program files\git\usr\bin;C:\tools\ruby25\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\GooGet;C:\Program Files\Google\Compute Engine\metadata_scripts;C:\Program Files\Google\Compute Engine\sysprep;C:\Program Files\Docker;C:\ProgramData\chocolatey\bin;C:\Program Files\CMake\bin;C:\Program Files\Git\cmd;C:\Program Files\LLVM\bin;C:\Program Files\dotnet;C:\Users\travis\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
+        BUILDPATH := "\program files\git\usr\bin:\program files\git\usr\bin:\tools\ruby25\bin:\Windows\system32:\Windows:\Windows\System32\Wbem:\Windows\System32\WindowsPowerShell\v1.0:\Windows\System32\OpenSSH:\ProgramData\GooGet:\Program Files\Google\Compute Engine\metadata_scripts:\Program Files\Google\Compute Engine\sysprep:\Program Files\Docker:\ProgramData\chocolatey\bin:\Program Files\CMake\bin:\Program Files\Git\cmd:\Program Files\LLVM\bin:\Program Files\dotnet:\Users\travis\AppData\Local\Microsoft\WindowsApps:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
