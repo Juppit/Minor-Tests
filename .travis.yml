@@ -3,11 +3,7 @@ jobs:
   include:
     - os: windows
       script:
-        - echo $PATH
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
-        - echo $PATH
-        - ls "/c/Program Files/CMake/bin"
-        - ls "/Program Files/CMake/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip"
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe
@@ -17,8 +13,7 @@ jobs:
         - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip"
         - unzip m4-1.4.14-1-dep.zip
         - mv bin/regex* /usr/bin
-        - ls /usr/bin /c/usr/bin
-        - CC="C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin\gcc.exe"
+        - CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         - "travis_wait 50 mingw32-make"
         - cat src/gmp-*/build-Msys64/config.log
     # - os: linux
