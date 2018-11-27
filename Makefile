@@ -2,7 +2,7 @@
 #
 # Last edit: 21.06.2018
 
-BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$(PATH)
 #BUILDPATH = "$(PATH)"
 
 PLATFORM := $(shell uname -s)
@@ -35,7 +35,7 @@ ifeq ($(OS),Windows_NT)
         BUILD_OS := MSYS$(ARCH)
         BUILD_OS := Msys$(ARCH)
         #BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
-        BUILDPATH := /bin:/usr/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
+        #BUILDPATH := /bin:/usr/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
