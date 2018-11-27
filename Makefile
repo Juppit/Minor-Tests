@@ -288,7 +288,7 @@ define Build_Modul
     @echo "#### Build $1..." | tee -a $(ERROR_LOG)
     @#### Build: Path=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2
     @#### for '+' token see https://www.gnu.org/software/make/manual/html_node/Error-Messages.html
-    +PATH=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2 $(QUIET)
+    +@PATH=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2 $(QUIET)
     @touch $(SOURCE_DIR)/.$1.builded
 endef
 
@@ -297,7 +297,7 @@ define Install_Modul
     @echo "#### Install $1..." | tee -a $(ERROR_LOG)
     @echo "##########################"
     @#### "Install: Path=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3=$(INST_OPT) -C $2"
-    +PATH=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3 -C $2 $(QUIET)
+    +@PATH=$(SAFEPATH); $(MAKE) $(MAKE_OPT) $3 -C $2 $(QUIET)
     @$(OUTPUT_DATE)
     @touch $(SOURCE_DIR)/.$1.installed
 endef
