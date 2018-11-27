@@ -2,8 +2,8 @@
 #
 # Last edit: 21.06.2018
 
-#BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
-BUILDPATH = "$(PATH)"
+BUILDPATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
+#BUILDPATH = "$(PATH)"
 
 PLATFORM := $(shell uname -s)
 ifneq (,$(findstring 64, $(shell uname -m)))
@@ -42,6 +42,7 @@ ifeq ($(OS),Windows_NT)
         BUILDPATH := /Windows/system32:$(BUILDPATH)
         BUILDPATH := "/Program Files/CMake/bin":$(BUILDPATH)
         BUILDPATH := "$(PATH)"
+        BUILDPATH := "C:\program files\git\usr\bin;C:\program files\git\usr\bin;C:\tools\ruby25\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\GooGet;C:\Program Files\Google\Compute Engine\metadata_scripts;C:\Program Files\Google\Compute Engine\sysprep;C:\Program Files\Docker;C:\ProgramData\chocolatey\bin;C:\Program Files\CMake\bin;C:\Program Files\Git\cmd;C:\Program Files\LLVM\bin;C:\Program Files\dotnet;C:\Users\travis\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin"
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))
         BUILD_OS := Cygwin$(ARCH)
