@@ -34,7 +34,6 @@ ifeq ($(OS),Windows_NT)
     ifneq (,$(findstring MSYS,$(PLATFORM)))
         BUILD_OS := MSYS$(ARCH)
         BUILD_OS := Msys$(ARCH)
-        echo $PATH
         #BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
         BUILDPATH := /ProgramData/Chocolatey/bin:/usr/bin:$(BUILDPATH)
         BUILDPATH := /ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin:$(BUILDPATH)
