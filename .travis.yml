@@ -3,7 +3,8 @@ jobs:
   include:
     - os: windows
       install:
-        - ls -l /m*/
+        - ls -l /mingw64
+        - ls -l /mingw64/bin
         - ls -l /usr/bin
         - ls -l /c/
         - ls /c/ProgramData/chocolatey/bin
