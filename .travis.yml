@@ -6,8 +6,9 @@ jobs:
         - ls -l /m*/
         - ls -l /usr/bin
         - ls -l /c/
-        #- ls /c/ProgramData/chocolatey/bin
+        - ls /c/ProgramData/chocolatey/bin
         - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64
+        - ls /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe >>/dev/null
