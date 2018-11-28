@@ -23,7 +23,7 @@ jobs:
         # set PATH for the shell executing our Makefile
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin"
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
-        ###- "travis_wait 50 mingw32-make"
+        - "travis_wait 50 mingw32-make"
        # - cat src/gmp-*/build-Msys64/config.log
     # - os: linux
       # dist: trusty
