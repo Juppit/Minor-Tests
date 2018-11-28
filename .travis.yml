@@ -10,7 +10,7 @@ jobs:
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
-        - ls -l /c/Program Files/git/usr/bin
+        - ls -l "/c/Program Files/git/usr/bin"
         # Path needed for wget and unzip
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
