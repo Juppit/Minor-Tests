@@ -10,6 +10,9 @@ jobs:
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
+        # Path needed for wget ...
+        - where unzip
+        - where wget
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
@@ -22,7 +25,7 @@ jobs:
         - mv bin/regex* /usr/bin >>/dev/null
       script:
         # set PATH for the shell executing our Makefile
-        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
+        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         - "travis_wait 50 mingw32-make"
        # - cat src/gmp-*/build-Msys64/config.log
