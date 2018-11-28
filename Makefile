@@ -33,10 +33,10 @@ ifeq ($(OS),Windows_NT)
     endif
     ifneq (,$(findstring MSYS,$(PLATFORM)))
         BUILD_OS := MSYS$(ARCH)
+        # for travis windows system
         BUILD_OS := Msys$(ARCH)
         #BUILDPATH := /msys$(ARCH)/usr/bin:$(BUILDPATH)
         # choco/bin needed for wget etc.
-        #BUILDPATH := /bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
         BUILDPATH := /bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
     endif
     ifneq (,$(findstring CYGWIN,$(PLATFORM)))

@@ -8,10 +8,9 @@ jobs:
         - ls -l /usr/bin
         - ls -l /c/
         - ls -l /c/ProgramData/chocolatey/bin
-        - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
         - ls -l "/c/Program Files/git/usr/bin"
-        # Path needed for wget and unzip
+        # set Path needed for wget and unzip
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
@@ -23,10 +22,10 @@ jobs:
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
       script:
+        #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
-        #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
-        - "travis_wait 50 mingw32-make"
+        #- "travis_wait 50 mingw32-make"
        # - cat src/gmp-*/build-Msys64/config.log
     # - os: linux
       # dist: trusty
