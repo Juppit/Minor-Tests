@@ -26,7 +26,8 @@ jobs:
         # set PATH for the shell executing our Makefile
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
         - "travis_wait 50 mingw32-make"
-        - cat distrib/Msys64-error.log distrib/Msys64-build.log
+        - cat distrib/Msys64-error.log
+        - cat distrib/Msys64-build.log
     # - os: linux
       # dist: trusty
       # addons: 
