@@ -288,7 +288,7 @@ endef
 define Build_Modul
     @echo "##########################"
     @echo "#### Build $1..." | tee -a $(ERROR_LOG)
-    @#### Build: Path=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2
+    #### Build: Path=$(SAFEPATH); $3 $(MAKE) $(MAKE_OPT) $4 -C $2
     @#### for '+' token see https://www.gnu.org/software/make/manual/html_node/Error-Messages.html
     +PATH=$(SAFEPATH); $3 $(MAKE) $4 -C $2
     @touch $(SOURCE_DIR)/.$1.builded
