@@ -3,7 +3,6 @@ jobs:
   include:
     - os: windows
       install:
-        - where mingw-get
         - ls -l /mingw64
         - ls -l /mingw64/bin
         - ls -l /usr/bin
