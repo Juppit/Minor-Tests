@@ -10,7 +10,7 @@ jobs:
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
         - ls -l "/c/Program Files/git/usr/bin"
-        - ln -s /c/ProgramData/chocolatey/bin/mingw32-make.exe /usr/bin/make.exe /usr/bin/make.exe
+        - ln -s /c/ProgramData/chocolatey/bin/mingw32-make.exe /usr/bin/make.exe
         - ls -l /usr/bin
         # set Path needed for wget and unzip
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
