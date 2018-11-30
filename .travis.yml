@@ -22,7 +22,7 @@ jobs:
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
         - cp /c/ProgramData/chocolatey/bin/mingw32-make.exe /usr/bin/make.exe
-        - ls /usr/bin
+        - ls -l /usr/bin
       script:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
