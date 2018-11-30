@@ -13,7 +13,7 @@ jobs:
         - ln -s /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/mingw32-make.exe /usr/bin/make.exe
         - ls -l /usr/bin
         # set Path needed for wget and unzip
-        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
+        #- PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe >>/dev/null
