@@ -10,6 +10,8 @@ jobs:
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
         - ls -l "/c/Program Files/git/usr/bin"
+        - ln -s /c/ProgramData/chocolatey/bin/mingw32-make.exe /usr/bin/make.exe /usr/bin/make.exe
+        - ls -l /usr/bin
         # set Path needed for wget and unzip
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
@@ -21,7 +23,7 @@ jobs:
         - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip" >>/dev/null
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
-        - cp /c/ProgramData/chocolatey/bin/mingw32-make.exe /usr/bin/make.exe
+        #- cp /c/ProgramData/chocolatey/bin/mingw32-make.exe /usr/bin/make.exe
         - ls -l /usr/bin
       script:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
