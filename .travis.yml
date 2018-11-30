@@ -3,6 +3,7 @@ jobs:
   include:
     - os: windows
       install:
+        - where mingw32-make
         - ls -l /mingw64
         - ls -l /mingw64/bin
         - ls -l /usr/bin
@@ -21,7 +22,6 @@ jobs:
         - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip" >>/dev/null
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
-        - where mingw32-make
         - cp /c/ProgramData/chocolatey/bin/mingw32-make /usr/bin/make
         - ls /usr/bin
       script:
