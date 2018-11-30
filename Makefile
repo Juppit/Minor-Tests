@@ -318,7 +318,7 @@ $(SOURCE_DIR)/.$(GMP).loaded:
 $(SOURCE_DIR)/.$(GMP).extracted: $(SOURCE_DIR)/.$(GMP).loaded
 	$(call Extract_Modul,$(GMP),$(GMP_VERSION),$(GMP_DIR),$(GMP_TAR),$(GMP_TAR_DIR))
 $(SOURCE_DIR)/.$(GMP).configured: $(SOURCE_DIR)/.$(GMP).extracted
-	$(call Config_Modul,$(GMP),$(BUILD_GMP_DIR),$(GMP_CONF) --prefix=$(COMP_LIB)/$(GMP)-$(GMP_VERSION),$(GMP_OPT))
+	$(call Config_Modul,$(GMP),$(BUILD_GMP_DIR),$(GMP_CONF) --prefix=$(COMP_LIB)/$(GMP)-$(GMP_VERSION) --target=x86_64-pc-mingw32,$(GMP_OPT))
 $(SOURCE_DIR)/.$(GMP).builded: $(SOURCE_DIR)/.$(GMP).configured
 	$(call Build_Modul,$(GMP),$(BUILD_GMP_DIR))
 $(SOURCE_DIR)/.$(GMP).installed: $(SOURCE_DIR)/.$(GMP).builded
