@@ -21,11 +21,12 @@ jobs:
         - wget "https://datapacket.dl.sourceforge.net/project/gnuwin32/m4/1.4.14-1/m4-1.4.14-1-dep.zip" >>/dev/null
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
+        - mv /c/ProgramData/chocolatey/bin/mingw32-make /usr/bin
       script:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
         - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
-        - "travis_wait 50 mingw32-make"
+        - "travis_wait 50 make"
         - cat distrib/Msys64-error.log
         - cat distrib/Msys64-build.log
     # - os: linux
