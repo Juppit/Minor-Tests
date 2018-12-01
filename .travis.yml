@@ -11,7 +11,7 @@ jobs:
         - ls -l /c/
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
-        - ls -l "/c/Program Files/git/usr/bin"
+        - ls -l '/c/Program Files/git/usr/bin'
         - ln -s /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/mingw32-make.exe /usr/bin/make.exe
         - ls -l /usr/bin
         # set Path needed for wget and unzip
@@ -30,7 +30,7 @@ jobs:
       script:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
-        - PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin"
+        - PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
         - "travis_wait 50 mingw32-make"
         - cat distrib/Msys64-error.log
         - cat distrib/Msys64-build.log
