@@ -7,6 +7,7 @@ jobs:
         - ls -l /mingw64
         - ls -l /mingw64/bin
         - ls -l /usr/bin
+        - ls -l /bin
         - ls -l /c/
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
