@@ -190,8 +190,6 @@ gmp: $(TOOLCHAIN)
 	@echo $(GMP)-$(GMP_VERSION)
 	@echo "SysPath:   $(PATH)"
 	@echo "BuildPath: $(BUILDPATH)"
-	@echo "Env.:"
-	set
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).loaded
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).extracted
 	@$(MAKE) $(SOURCE_DIR)/.$(GMP).configured
