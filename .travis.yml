@@ -3,7 +3,6 @@ jobs:
   include:
     - os: windows
       install:
-        - where sh.exe
         - ls -l /mingw64
         - ls -l /mingw64/bin
         - ls -l /usr/bin
@@ -30,6 +29,7 @@ jobs:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
         - mv '/c/program files/Git/usr/bin/sh.exe' /usr/bin
+        - where sh.exe
         - ls -l '/c/Program Files/git/usr/bin'
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
         - "travis_wait 50 mingw32-make"
@@ -61,8 +61,8 @@ after_script:
 on_failure:
   - tail -20 distrib/*error.log
 before_install:
-#  - test -n $CC  && unset CC
-#  - test -n $CXX && unset CXX
+  - unset CC
+  - unset CXX
 deploy: 
   api_key: $CheckCIDeploy
   file: distrib/*
