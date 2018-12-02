@@ -3,7 +3,7 @@ jobs:
   include:
     - os: windows
       install:
-        - set
+        - where sh.exe
         - ls -l /mingw64
         - ls -l /mingw64/bin
         - ls -l /usr/bin
