@@ -29,13 +29,13 @@ jobs:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
         - echo $PATH
+        - ls -l '/c/Program Files/git/usr/bin/s*'
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
         - mv '/c/Program files/Git/usr/bin/sh.exe' /usr/bin
         - ls -l '/c/Program files/Git/cmd'
         - ls -l /usr/bin/s*
         - rm -f '/c/Program files/Git/usr/bin/sh.exe'
         #- where sh.exe
-        - ls -l '/c/Program Files/git/usr/bin/s*'
         - "travis_wait 50 mingw32-make"
         - cat distrib/Msys64-error.log
         - cat distrib/Msys64-build.log
