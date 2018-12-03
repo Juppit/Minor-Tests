@@ -10,7 +10,7 @@ jobs:
         - ls -l /c/
         - ls -l /c/ProgramData/chocolatey/bin
         - ls -l /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin
-        - ls -l '/c/Program Files/git/usr/bin'
+        - ls -l '/c/Program Files/Git/usr/bin'
         - ln -s /c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/mingw32-make.exe /usr/bin/make.exe
         # set Path needed for wget and unzip
         #- PATH="/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/Program Files/git/usr/bin"
@@ -29,12 +29,12 @@ jobs:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
         - echo $PATH
-        - ls -l '/c/Program Files/git/usr/bin/s*'
+        - ls -l '/c/Program Files/Git/usr/bin/s*'
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
-        - mv '/c/Program files/Git/usr/bin/sh.exe' /usr/bin
-        - ls -l '/c/Program files/Git/cmd'
+        - mv '/c/Program Files/Git/usr/bin/sh.exe' /usr/bin
+        - ls -l '/c/Program Files/Git/cmd'
         - ls -l /usr/bin/s*
-        - rm -f '/c/Program files/Git/usr/bin/sh.exe'
+        - rm -f '/c/Program Files/Git/usr/bin/sh.exe'
         #- where sh.exe
         - "travis_wait 50 mingw32-make"
         - cat distrib/Msys64-error.log
