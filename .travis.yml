@@ -30,9 +30,10 @@ jobs:
         # set PATH for the shell executing our Makefile
         - echo $PATH
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
-        - mv '/c/program files/Git/usr/bin/sh.exe' /usr/bin
+        - mv '/c/Program files/Git/usr/bin/sh.exe' /usr/bin
+        - ls -l '/c/Program files/Git/cmd'
         - ls -l /usr/bin/s*
-        - rm -f '/c/program files/Git/usr/bin/sh.exe'
+        - rm -f '/c/Program files/Git/usr/bin/sh.exe'
         #- where sh.exe
         - ls -l '/c/Program Files/git/usr/bin/s*'
         - "travis_wait 50 mingw32-make"
