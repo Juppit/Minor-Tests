@@ -39,5 +39,5 @@ all:
 	mkdir -p build-gmp
 	mkdir -p libs
 	PATH=$(BUILDPATH); cd build-gmp; ../gmp-6.1.2/configure --prefix=$(PWD)/libs/gmp-6.1.2 --host=x86_64-pc-mingw32  --disable-shared --enable-static
-	PATH=$(BUILDPATH); make -C build-gmp
-	PATH=$(BUILDPATH); make install -s -C build-gmp
+	PATH=$(BUILDPATH); $(MAKE) -C build-gmp
+	PATH=$(BUILDPATH); $(MAKE) install -s -C build-gmp
