@@ -6,6 +6,7 @@ jobs:
         - where sh.exe
         - ls -l '/c/program Files/Git/usr/bin' >> git-usr-bin.txt
         - ls -l /usr/bin >> usr-bin.txt
+        - ls -l *.txt
         - diff git-usr-bin.txt usr-bin.txt
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
