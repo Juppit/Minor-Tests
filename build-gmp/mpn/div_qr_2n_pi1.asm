@@ -1,1 +1,0 @@
-../../gmp-6.1.2/mpn/x86_64/div_qr_2n_pi1.asm

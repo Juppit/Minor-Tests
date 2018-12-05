@@ -1,1 +1,0 @@
-../../gmp-6.1.2/mpn/x86_64/aorrlsh2_n.asm

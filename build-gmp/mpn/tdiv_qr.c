@@ -1,1 +1,0 @@
-../../gmp-6.1.2/mpn/generic/tdiv_qr.c

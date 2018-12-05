@@ -1,1 +1,0 @@
-../../gmp-6.1.2/mpn/generic/sec_aors_1.c
