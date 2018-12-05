@@ -34,6 +34,10 @@ all:
 	@echo "Build ist: $(BUILD_OS)"
 	@echo "SysPath:   $(PATH)"
 	@echo "BuildPath: $(BUILDPATH)"
+	touch new_file.c
+	echo $(shell echo *.c)
+
+stop:
 	wget https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2 >> /dev/null
 	bsdtar -xf gmp-6.1.2.tar.bz2 >> /dev/null
 	mkdir -p build-gmp
