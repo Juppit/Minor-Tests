@@ -29,6 +29,7 @@ jobs:
         #- CC=/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe
         # set PATH for the shell executing our Makefile
         - git config -l
+        - ls -l '/c/Program Files/Git/mingw64'
         - echo $PATH
         - ls -l '/c/Program Files/Git/usr/bin/s*'
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
