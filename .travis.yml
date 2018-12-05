@@ -3,8 +3,10 @@ jobs:
   include:
     - os: windows
       install:
-        - ls -l '/c/program Files/Git/usr/bin'
-        - ls -l /usr/bin
+        - where sh.exe
+        - ls -l '/c/program Files/Git/usr/bin' >> git-usr-bin.txt
+        - ls -l /usr/bin >> usr-bin.txt
+        - diff git-usr-bin.txt usr-bin.txt
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe >>/dev/null
@@ -15,33 +17,9 @@ jobs:
         - unzip m4-1.4.14-1-dep.zip >>/dev/null
         - mv bin/regex* /usr/bin >>/dev/null
       script:
+        - cd $TRAVIS_BUILD_DIR
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
         - "travis_wait 50 mingw32-make"
-    # - os: linux
-      # dist: trusty
-      # addons: 
-        # apt:
-          # sources: 
-            # - ubuntu-toolchain-r-test
-          # packages: 
-            # - bsdtar gperf texinfo help2man gcc-multilib g++-multilib
-      # script:
-         # - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
-# #         - "travis_wait 50 make"
-    # - os: osx
-      # script:
-         # - ls -a "C:/Users/travis/build/Juppit/Minor-Tests/src"
-# #         - "travis_wait 50 make"
-# #    - os: osx
-# #      script:
-# #        - make build-2
-before_script:
-  - cd $TRAVIS_BUILD_DIR
-  - mkdir -p distrib
-after_script:
-  - ls -la . distrib
-on_failure:
-  - tail -20 distrib/*error.log
 before_install:
   - unset CC
   - unset CXX
