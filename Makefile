@@ -34,6 +34,7 @@ all:
 	@echo "Build ist: $(BUILD_OS)"
 	@echo "SysPath:   $(PATH)"
 	@echo "BuildPath: $(BUILDPATH)"
+	where sh.exe
 	wget https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2
 	bsdtar -xf gmp-6.1.2.tar.bz2
 	mkdir -p build-gmp
