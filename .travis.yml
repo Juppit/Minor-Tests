@@ -3,7 +3,7 @@ jobs:
   include:
     - os: windows
       install:
-        - where sh.exe
+        #- where sh.exe # /c/program Files/Git/usr/bin/sh.exe
         - ls -l '/c/program Files/Git/usr/bin' >> git-usr-bin.txt
         - ls -l /usr/bin >> usr-bin.txt
         - ls -l *.txt
@@ -19,6 +19,7 @@ jobs:
         - mv bin/regex* /usr/bin >>/dev/null
       script:
         - cd $TRAVIS_BUILD_DIR
+        - echo $PATH
         - export PATH='/bin:/usr/bin:/c/ProgramData/chocolatey/bin:/c/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin'
         - "travis_wait 50 mingw32-make"
 before_install:
