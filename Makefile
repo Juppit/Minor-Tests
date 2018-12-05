@@ -36,6 +36,7 @@ all:
 	@echo "BuildPath: $(BUILDPATH)"
 	touch new_file.c
 	echo $(shell echo *.c)
+	echo "sh.exe echo *.c"
 
 stop:
 	wget https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2 >> /dev/null
