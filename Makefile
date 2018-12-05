@@ -35,10 +35,10 @@ all:
 	@echo "SysPath:   $(PATH)"
 	@echo "BuildPath: $(BUILDPATH)"
 	where sh.exe
-	wget https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2
-	bsdtar -xf gmp-6.1.2.tar.bz2
+	wget https://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.bz2 >> /dev/null
+	bsdtar -xf gmp-6.1.2.tar.bz2 >> /dev/null
 	mkdir -p build-gmp
 	mkdir -p libs
-	PATH=$(BUILDPATH); cd build-gmp; ../gmp-6.1.2/configure --prefix=$(PWD)/libs/gmp-6.1.2 --host=x86_64-pc-mingw32  --disable-shared --enable-static
+	PATH=$(BUILDPATH); cd build-gmp; ../gmp-6.1.2/configure --prefix=$(PWD)/libs/gmp-6.1.2 --host=x86_64-pc-mingw32  --disable-shared --enable-static >>/dev/null
 	PATH=$(BUILDPATH); $(MAKE) -C build-gmp
 	PATH=$(BUILDPATH); $(MAKE) install -s -C build-gmp
