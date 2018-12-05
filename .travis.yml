@@ -3,6 +3,8 @@ jobs:
   include:
     - os: windows
       install:
+        - ls -l '/c/program Files/Git/usr/bin'
+        - ls -l /usr/bin
         - wget "https://netcologne.dl.sourceforge.net/project/mingw/MinGW/Extension/bsdtar/basic-bsdtar-2.8.3-1/basic-bsdtar-2.8.3-1-mingw32-bin.zip" >>/dev/null
         - unzip basic-bsdtar-2.8.3-1-mingw32-bin.zip >>/dev/null
         - mv basic-bsdtar.exe /usr/bin/bsdtar.exe >>/dev/null
