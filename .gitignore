@@ -9,5 +9,7 @@ tarballs
 distrib
 appveyor*
 !appveyor.yml
-
+build_gmp
+libs
+gmp-*
 
